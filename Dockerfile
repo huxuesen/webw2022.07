@@ -1,4 +1,5 @@
 FROM python:3.9-slim-buster
+FROM mcr.microsoft.com/playwright:v1.23.0-focal
 
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
