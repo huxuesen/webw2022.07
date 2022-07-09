@@ -11,10 +11,6 @@ COPY . /app
 
 WORKDIR /app
 
-RUN sudo -i
-RUN apt update
-RUN apt install -y python3.9
-RUN apt install -y python3-pip
 RUN set -x; buildDeps='wget build-essential' \
 && apt-get update && apt-get install -y python3.9 && apt-get install -y python3-pip \
 && apt-get install -y ${buildDeps} \
