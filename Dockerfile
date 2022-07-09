@@ -6,13 +6,12 @@ ENV PORT 5000
 ENV USERNAME admin
 ENV PASSWORD admin
 ENV OPENSSL_CONF /etc/ssl/
-ENV TZ=Asia/Shanghai
 
 COPY . /app
 
 WORKDIR /app
 
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+RUN timedatectl set-timezone Asia/Shanghai \
 && set -x; buildDeps='wget build-essential' \
 && apt-get update && apt-get install -y python3.9 && apt-get install -y python3-pip && apt-get install -y python-is-python3 \
 && apt-get install -y ${buildDeps} \
@@ -20,8 +19,7 @@ chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfo
 && rm -rf /var/lib/apt/lists/* \
 && export OS_ARCH=$(uname -m) \
 && pip install -r requirements.txt && pip cache purge \
-&& playwright install-deps\
-&& playwright install chromium\
+&& playwright install-deps chromium \
 && rm -rf /var/lib/apt/lists/* \
 && apt-get purge -y --auto-remove $buildDeps
 
