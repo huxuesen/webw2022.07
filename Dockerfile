@@ -11,6 +11,7 @@ COPY . /app
 
 WORKDIR /app
 
+RUN sudo -i
 RUN apt update
 RUN apt install -y python3.9
 RUN apt install -y python3-pip
