@@ -10,4 +10,4 @@ django==2.2.28
 django-simpleui==2022.6.131
 django-apscheduler==0.3.0
 django-import-export==2.7.1
-playwright
+playwright==1.23
