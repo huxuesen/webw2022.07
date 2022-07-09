@@ -10,7 +10,7 @@ class PhantomJSSelector(FatherSelector):
     def get_html(self, url, headers):
 
         playwright = sync_playwright().start()
-        browser = playwright.chromium.launch(headless=False)
+        browser = playwright.chromium.launch()
         context = browser.new_context()
         page = context.new_page()
         page.goto(url)

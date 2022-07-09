@@ -12,7 +12,7 @@ COPY . /app
 WORKDIR /app
 
 RUN set -x; buildDeps='wget build-essential' \
-&& apt-get update && apt-get install -y python3.9 && apt-get install -y python3-pip \
+&& apt-get update && apt-get install -y python3.9 && apt-get install -y python3-pip && apt-get install -y python-is-python3 \
 && apt-get install -y ${buildDeps} \
 chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev \
 && rm -rf /var/lib/apt/lists/* \
@@ -20,6 +20,7 @@ chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfo
 && pip install -r requirements.txt && pip cache purge \
 && playwright install-deps\
 && playwright install chromium\
+&& rm -rf /var/lib/apt/lists/* \
 && apt-get purge -y --auto-remove $buildDeps
 
 EXPOSE $PORT
