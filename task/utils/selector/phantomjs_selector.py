@@ -2,13 +2,11 @@ from collections import OrderedDict
 from playwright.sync_api import sync_playwright
 from task.utils.selector.selector import SelectorABC as FatherSelector
 
-
 class PhantomJSSelector(FatherSelector):
     def __init__(self, debug=False):
         self.debug = debug
 
     def get_html(self, url, headers):
-
         playwright = sync_playwright().start()
         browser = playwright.chromium.launch()
         context = browser.new_context()
