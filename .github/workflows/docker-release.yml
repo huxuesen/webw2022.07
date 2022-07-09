@@ -2,7 +2,7 @@ name: '[docker] CI for releases'
 
 on:
     push:
-        branches: 2022.06
+        branches: master
 
 jobs:
     release:
@@ -33,4 +33,4 @@ jobs:
                 --platform linux/amd64,linux/arm64 \
                 --output "type=image,push=true" \
                 --file ./Dockerfile . \
-                --tag $(echo "${DOCKER_USERNAME}" | tr '[:upper:]' '[:lower:]')/webw:2022.06
+                --tag $(echo "${DOCKER_USERNAME}" | tr '[:upper:]' '[:lower:]')/webw:2022.07
