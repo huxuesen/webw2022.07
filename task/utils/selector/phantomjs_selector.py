@@ -12,7 +12,7 @@ class PhantomJSSelector(FatherSelector):
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=False)
             page = browser.new_page()
-            #page.add_init_script(js)
+            #page.add_init_script(js)1
             if headers:
                 header_dict = ast.literal_eval(headers)
                 if type(header_dict) != dict:
