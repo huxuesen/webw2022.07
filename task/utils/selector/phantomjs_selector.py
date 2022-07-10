@@ -11,6 +11,12 @@ class PhantomJSSelector(FatherSelector):
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page()
+            if headers:
+                header_dict = ast.literal_eval(headers)
+                if type(header_dict) != dict:
+                    page.set_extra_http_headers({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36 Edg/103.0.1264.49'})
+                page.set_extra_http_headers(header_dict)
+
             page.goto(url)
             html = page.content()
             browser.close()
