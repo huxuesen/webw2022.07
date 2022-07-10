@@ -1,3 +1,4 @@
+import ast
 from collections import OrderedDict
 from playwright.sync_api import sync_playwright
 from task.utils.selector.selector import SelectorABC as FatherSelector
@@ -7,14 +8,12 @@ class PhantomJSSelector(FatherSelector):
         self.debug = debug
 
     def get_html(self, url, headers):
-        playwright = sync_playwright().start()
-        browser = playwright.chromium.launch()
-        context = browser.new_context()
-        page = context.new_page()
-        page.goto(url)
-        html = page.content()
-        browser.close()
-        playwright.stop()
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            page = browser.new_page()
+            page.goto(url)
+            html = page.content()
+            browser.close()
         return html
 
     def get_by_xpath(self, url, selector_dict, headers=None):
