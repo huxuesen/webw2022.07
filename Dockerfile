@@ -17,7 +17,7 @@ chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfo
 && rm -rf /var/lib/apt/lists/* \
 && export OS_ARCH=$(uname -m) \
 && pip install -r requirements.txt && pip cache purge \
-&& playwright install \
+&& playwright install chromium\
 && rm -rf /var/lib/apt/lists/* \
 && apt-get purge -y --auto-remove $buildDeps
 
