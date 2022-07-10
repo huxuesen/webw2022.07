@@ -3,16 +3,16 @@ from collections import OrderedDict
 from playwright.sync_api import sync_playwright
 from task.utils.selector.selector import SelectorABC as FatherSelector
 
-js="""Object.defineProperties(navigator, {webdriver:{get:()=>undefined}});"""
+#js = """Object.defineProperties(navigator, {webdriver:{get:()=>undefined}});"""
 class PhantomJSSelector(FatherSelector):
     def __init__(self, debug=False):
         self.debug = debug
 
     def get_html(self, url, headers):
         with sync_playwright() as p:
-            browser = p.chromium.launch()
+            browser = p.chromium.launch(headless=False)
             page = browser.new_page()
-            page.add_init_script(js)
+            #page.add_init_script(js)
             if headers:
                 header_dict = ast.literal_eval(headers)
                 if type(header_dict) != dict:
