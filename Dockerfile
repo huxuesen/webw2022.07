@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM python:3.9-slim-buster
 
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
@@ -11,15 +11,13 @@ COPY . /app
 
 WORKDIR /app
 
-RUN timedatectl set-timezone Asia/Shanghai \
-&& set -x; buildDeps='wget build-essential' \
-&& apt-get update && apt-get install -y python3.9 && apt-get install -y python3-pip && apt-get install -y python-is-python3 \
-&& apt-get install -y ${buildDeps} \
-chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev \
+RUN set -x; buildDeps='wget build-essential' \
+&& apt-get update && apt-get install -y ${buildDeps} \
+chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev gstreamer1.0-libav libnss3-tools libatk-bridge2.0-0 libcups2-dev libxkbcommon-x11-0 libxcomposite-dev libxrandr2 libgbm-dev libgtk-3-0 \
 && rm -rf /var/lib/apt/lists/* \
 && export OS_ARCH=$(uname -m) \
 && pip install -r requirements.txt && pip cache purge \
-&& playwright install-deps chromium \
+&& playwright install \
 && rm -rf /var/lib/apt/lists/* \
 && apt-get purge -y --auto-remove $buildDeps
 
