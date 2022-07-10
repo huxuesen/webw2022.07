@@ -19,6 +19,7 @@ chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfo
 && pip install -r requirements.txt && pip cache purge \
 && playwright install chromium\
 && rm -rf /var/lib/apt/lists/* \
+&& pip cache purge \
 && apt-get purge -y --auto-remove $buildDeps
 
 EXPOSE $PORT
