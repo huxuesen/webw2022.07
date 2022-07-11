@@ -10,7 +10,7 @@ class PhantomJSSelector(FatherSelector):
 
     def get_html(self, url, headers):
         browser_args = [
-            '--window-size=1300,570',
+            '--window-size=1440,900',
             '--window-position=000,000',
             '--disable-dev-shm-usage',
             '--no-sandbox',
@@ -21,7 +21,6 @@ class PhantomJSSelector(FatherSelector):
             '--no-first-run',
             '--no-zygote',
             '--single-process',
-            '--disable-gpu',
             '--use-gl=egl',
             '--disable-blink-features=AutomationControlled',
             '--disable-background-networking',
