@@ -21,8 +21,6 @@ class PhantomJSSelector(FatherSelector):
                 '--disable-accelerated-2d-canvas',
                 '--no-first-run',
                 '--no-zygote',
-                '--single-process',
-                '--disable-gpu',
                 '--use-gl=egl',
                 '--disable-blink-features=AutomationControlled',
                 '--disable-background-networking',
