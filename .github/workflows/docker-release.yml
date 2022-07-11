@@ -33,4 +33,4 @@ jobs:
                 --platform linux/amd64 \
                 --output "type=image,push=true" \
                 --file ./Dockerfile . \
-                --tag $(echo "${DOCKER_USERNAME}" | tr '[:upper:]' '[:lower:]')/webw:2022.07.11.10
+                --tag $(echo "${DOCKER_USERNAME}" | tr '[:upper:]' '[:lower:]')/webw:2022.07.11.11
