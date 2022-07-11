@@ -19,7 +19,7 @@ class PhantomJSSelector(FatherSelector):
                     page.set_extra_http_headers({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36 Edg/103.0.1264.49'})
                 page.set_extra_http_headers(header_dict)
 
-            page.goto(url)
+            page.goto(url, timeout = 0)
             html = page.content()
             browser.close()
         return html
