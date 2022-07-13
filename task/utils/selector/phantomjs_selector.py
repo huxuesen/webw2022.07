@@ -58,7 +58,7 @@ class PhantomJSSelector(FatherSelector):
                 page.set_extra_http_headers(header_dict)
 
             page.goto(url, timeout = 0)
-            page.wait_for_timeout(10000)
+            page.wait_for_timeout(20000)
             html = page.content()
             browser.close()
         return html
