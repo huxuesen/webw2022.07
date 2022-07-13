@@ -1,8 +1,9 @@
 import ast
+import os
 from collections import OrderedDict
 from playwright.sync_api import sync_playwright
 from task.utils.selector.selector import SelectorABC as FatherSelector
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #js = """Object.defineProperties(navigator, {webdriver:{get:()=>undefined}});"""
 class PhantomJSSelector(FatherSelector):
     def __init__(self, debug=False):
@@ -49,8 +50,7 @@ class PhantomJSSelector(FatherSelector):
         ]
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=False, args=browser_args)
-            page = browser.new_page()
-            #page.add_init_script(js)1
+            page = browser.new_page(ignore_https_errors=True, java_script_enabled=True)
             if headers:
                 header_dict = ast.literal_eval(headers)
                 if type(header_dict) != dict:
@@ -58,6 +58,7 @@ class PhantomJSSelector(FatherSelector):
                 page.set_extra_http_headers(header_dict)
 
             page.goto(url, timeout = 0)
+            page.wait_for_timeout(10000)
             html = page.content()
             browser.close()
         return html
